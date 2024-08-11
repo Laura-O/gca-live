@@ -1,8 +1,9 @@
 <script lang="ts">
+    import { t } from "$lib/translations";
     export let data;
 </script>
 
-<h1>Competitions</h1>
+<h1>{$t("content.comp")}</h1>
 
 {#each data.competitions as competition}
     <h2>{competition.name}</h2>
@@ -11,14 +12,14 @@
         >WCA Live</a
     >
     <a href="https://www.competitiongroups.com/competitions/{competition.id}"
-        >Einteilungen</a
+        >{$t("content.grouping")}</a
     >
     <a
         href="https://www.worldcubeassociation.org/competitions/{competition.id}#competition-schedule"
-        >Zeitplan</a
+        >{$t("content.schedule")}</a
     >
     <a
         href="https://www.worldcubeassociation.org/competitions/{competition.id}#general-info"
-        >Alle Infos</a
+        >{$t("content.info")}</a
     >
 {/each}

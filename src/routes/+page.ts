@@ -9,7 +9,7 @@ export async function load({ fetch }) {
     const nextWeek = new Date();
     nextWeek.setDate(nextWeek.getDate() + 7);
 
-    const filteredCompetitions = competitions.filter(comp => {
+    const filteredCompetitions = competitions.filter((comp: any) => {
         const compDate = new Date(comp.date.from);
         return compDate >= yesterday && compDate <= nextWeek;
     });
