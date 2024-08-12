@@ -17,7 +17,7 @@
                             role="button"
                             class="btn btn-primary"
                             href="https://live.worldcubeassociation.org/link/competitions/{competition.id}"
-                            >WCA Live</a
+                            target="_blank">WCA Live</a
                         >
                     </li>
                     <li>
@@ -25,7 +25,7 @@
                             role="button"
                             class="btn btn-primary"
                             href="https://www.competitiongroups.com/competitions/{competition.id}"
-                            >{$t("content.grouping")}</a
+                            target="_blank">{$t("content.grouping")}</a
                         >
                     </li>
                     <li>
@@ -33,7 +33,7 @@
                             role="button"
                             class="btn btn-primary"
                             href="https://www.worldcubeassociation.org/competitions/{competition.id}#competition-schedule"
-                            >{$t("content.schedule")}</a
+                            target="_blank">{$t("content.schedule")}</a
                         >
                     </li>
                     <li>
@@ -41,7 +41,7 @@
                             role="button"
                             class="btn btn-primary"
                             href="https://www.worldcubeassociation.org/competitions/{competition.id}#general-info"
-                            >{$t("content.info")}</a
+                            target="_blank">{$t("content.info")}</a
                         >
                     </li>
                 </ul>
