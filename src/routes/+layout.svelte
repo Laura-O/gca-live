@@ -23,7 +23,7 @@
         if (themes.includes(new_theme)) {
             const one_year = 60 * 60 * 24 * 365;
             window.localStorage.setItem("theme", new_theme);
-            document.cookie = `theme=${new_theme}; max-age=${one_year}; path=/;`;
+            document.cookie = `theme=${new_theme}; max-age=${one_year}; path=/; SameSite=Strict;`;
             document.documentElement.setAttribute("data-theme", new_theme);
             current_theme = new_theme;
         }
