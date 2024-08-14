@@ -1,6 +1,33 @@
-<script>
+<script lang="ts">
     import { t, locales, locale } from "$lib/translations";
     import logo from "$lib/assets/logo.png";
+
+    import { themes } from "$lib/themes";
+
+    import { onMount } from "svelte";
+
+    let current_theme = "light";
+
+    onMount(() => {
+        if (typeof window !== "undefined") {
+            const theme = window.localStorage.getItem("theme");
+            if (theme && themes.includes(theme)) {
+                document.documentElement.setAttribute("data-theme", theme);
+                current_theme = theme;
+            }
+        }
+    });
+
+    function set_theme(event: Event) {
+        const new_theme = current_theme === "light" ? "dark" : "light";
+        if (themes.includes(new_theme)) {
+            const one_year = 60 * 60 * 24 * 365;
+            window.localStorage.setItem("theme", new_theme);
+            document.cookie = `theme=${new_theme}; max-age=${one_year}; path=/;`;
+            document.documentElement.setAttribute("data-theme", new_theme);
+            current_theme = new_theme;
+        }
+    }
 </script>
 
 <div class="navbar bg-base-100">
@@ -9,7 +36,13 @@
     </div>
     <div class="flex-none mr-2">
         <label class="swap swap-rotate">
-            <input type="checkbox" value="dim" class="theme-controller" />
+            <input
+                type="checkbox"
+                class="theme-controller"
+                bind:value={current_theme}
+                on:change={set_theme}
+                checked={current_theme === "dark"}
+            />
             <!-- moon icon -->
             <svg
                 class="swap-off h-10 w-10 fill-current"
