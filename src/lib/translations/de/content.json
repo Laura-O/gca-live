@@ -2,5 +2,8 @@
     "comp": "Wettbewerbe",
     "grouping": "Gruppierung",
     "schedule": "Zeitplan",
-    "info": "Informationen"
+    "info": "Informationen",
+    "nocomps-title": "Keine Wettbewerbe",
+    "nocomps-content": "Leider gibt es aktuell keine Wettbewerbe.",
+    "wca-page": "WCA-Seite"
 }
