@@ -1,0 +1,9 @@
+{
+    "*.{ts}": [
+        "prettier --write"
+    ],
+    "*.{svelte}": [
+        "prettier --write",
+        "svelte-check"
+    ]
+}

@@ -1,9 +1,9 @@
 {
-    "comp": "Competitions",
-    "grouping": "Grouping",
-    "schedule": "Schedule",
-    "info": "Information",
-    "nocomps-title": "No Competitions",
-    "nocomps-content": "Unfortunately, there are currently no competitions.",
-    "wca-page": "WCA Website"
+	"comp": "Competitions",
+	"grouping": "Grouping",
+	"schedule": "Schedule",
+	"info": "Information",
+	"nocomps-title": "No Competitions",
+	"nocomps-content": "Unfortunately, there are currently no competitions.",
+	"wca-page": "WCA Website"
 }
