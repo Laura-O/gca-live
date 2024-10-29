@@ -10,11 +10,17 @@ export async function load({ fetch }) {
 	const nextWeek = new Date();
 	nextWeek.setDate(nextWeek.getDate() + 7);
 
-	const filteredCompetitions = competitions.filter((comp: any) => {
-		const startDate = new Date(comp.date.from);
-		const endDate = new Date(comp.date.till);
-		return startDate <= nextWeek && endDate >= today;
-	});
+	const filteredCompetitions = competitions
+		.filter((comp: any) => {
+			const startDate = new Date(comp.date.from);
+			const endDate = new Date(comp.date.till);
+			return startDate <= nextWeek && endDate >= today;
+		})
+		.sort((a: any, b: any) => {
+			const dateA = new Date(a.date.from);
+			const dateB = new Date(b.date.from);
+			return dateA.getTime() - dateB.getTime();
+		});
 
 	return {
 		competitions: filteredCompetitions
