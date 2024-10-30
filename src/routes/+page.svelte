@@ -24,7 +24,7 @@
 		</div>
 	{:else}
 		{#each data.competitions as competition}
-			<CompetitionCard competition="{competition}" />
+			<CompetitionCard competition="{competition}" showQRButton="{false}" />
 		{/each}
 	{/if}
 </div>
