@@ -1,6 +1,5 @@
 <script lang="ts">
 	import QRCode from 'qrcode';
-	import { onMount } from 'svelte';
 
 	export let url: string; // URL to encode in the QR code
 	let qrCodeDataUrl: string | undefined;
@@ -29,10 +28,10 @@
 	}
 </script>
 
-<div>
+<div class="flex flex-col items-center">
 	{#if qrCodeDataUrl}
 		<img src="{qrCodeDataUrl}" alt="QR Code" />
-		<button on:click="{downloadQRCode}">Download QR Code as PNG</button>
+		<button class="btn" on:click="{downloadQRCode}">Download PNG</button>
 	{:else}
 		<p>Generating QR Code...</p>
 	{/if}
