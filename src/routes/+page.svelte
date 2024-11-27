@@ -1,7 +1,14 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { t } from '$lib/translations';
 	import CompetitionCard from '$lib/components/CompetitionCard.svelte';
 	export let data;
+
+	// Update the URL with the selected `days` value
+	function updateDays(event: Event) {
+		const days = (event.target as HTMLSelectElement).value;
+		goto(`?days=${days}`);
+	}
 </script>
 
 <div
@@ -24,7 +31,19 @@
 		</div>
 	{:else}
 		{#each data.competitions as competition}
-			<CompetitionCard competition="{competition}" showQRButton="{false}" />
+			<CompetitionCard competition={competition} showQRButton={false} />
 		{/each}
 	{/if}
+</div>
+<div class="container mx-auto pb-24 place-items-center">
+	<label for="days" class="block mb-2">Show competitions for the next:</label>
+	<select
+		id="days"
+		class="select select-bordered w-full max-w-xs"
+		on:change={updateDays}
+	>
+		<option value="7" selected={data.days === 7}>7 days</option>
+		<option value="30" selected={data.days === 30}>30 days</option>
+		<option value="90" selected={data.days === 90}>90 days</option>
+	</select>
 </div>

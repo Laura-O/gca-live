@@ -1,4 +1,6 @@
-export async function load({ fetch }) {
+export async function load({ fetch, url }) {
+	const days = parseInt(url.searchParams.get('days') || '7', 10); // Default to 7 days if no parameter provided
+
 	const response = await fetch(
 		'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/master/api/competitions/DE.json'
 	);
@@ -6,15 +8,14 @@ export async function load({ fetch }) {
 	const competitions = deResponse.items;
 
 	const today = new Date();
-
-	const nextWeek = new Date();
-	nextWeek.setDate(nextWeek.getDate() + 7);
+	const dynamicDate = new Date();
+	dynamicDate.setDate(dynamicDate.getDate() + days);
 
 	const filteredCompetitions = competitions
 		.filter((comp: any) => {
 			const startDate = new Date(comp.date.from);
 			const endDate = new Date(comp.date.till);
-			return startDate <= nextWeek && endDate >= today;
+			return startDate <= dynamicDate && endDate >= today;
 		})
 		.sort((a: any, b: any) => {
 			const dateA = new Date(a.date.from);
@@ -23,6 +24,7 @@ export async function load({ fetch }) {
 		});
 
 	return {
-		competitions: filteredCompetitions
+		competitions: filteredCompetitions,
+		days // Pass days to the page for context
 	};
 }
