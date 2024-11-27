@@ -10,7 +10,7 @@
 <div class="card-compact bg-base-100 w-96 shadow">
 	<div class="card-body items-center text-center">
 		<h2 class="card-title">
-			<a href="{`/competitions/${competition.id}`}" class="text-primary">
+			<a href={`/competitions/${competition.id}`}>
 				{competition.name}
 			</a>
 		</h2>
@@ -50,7 +50,7 @@
 		</ul>
 		{#if showQRButton}
 			<div class="flex justify-end w-full">
-				<button class="modal-button" on:click="{() => (isModalOpen = true)}"
+				<button class="modal-button" on:click={() => (isModalOpen = true)}
 					><svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -75,15 +75,14 @@
 		{/if}
 	</div>
 </div>
-<div class="modal" class:modal-open="{isModalOpen}">
+<div class="modal" class:modal-open={isModalOpen}>
 	<div class="modal-box">
 		<QRCode
-			url="{`https://live.germancubeassociation.de/competitions/${competition.id}`}"
+			url={`https://live.germancubeassociation.de/competitions/${competition.id}`}
 		/>
 		<div class="modal-action">
 			<!-- 🔵 set false on click -->
-			<button class="btn" on:click="{() => (isModalOpen = false)}">Close</button
-			>
+			<button class="btn" on:click={() => (isModalOpen = false)}>Close</button>
 		</div>
 	</div>
 </div>
