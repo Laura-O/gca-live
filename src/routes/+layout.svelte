@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { t, locales, locale } from '$lib/translations';
 	import logo from '$lib/assets/logo.png';
-
 	import { themes } from '$lib/themes';
-
 	import { onMount } from 'svelte';
 
 	import '../app.css';
 
-	let current_theme = 'light';
+	let current_theme = 'emerald';
+	let isDarkTheme: boolean = current_theme === 'night';
 
 	onMount(() => {
 		if (typeof window !== 'undefined') {
@@ -22,8 +21,8 @@
 		}
 	});
 
-	function set_theme(event: Event) {
-		const new_theme = current_theme === 'light' ? 'dark' : 'light';
+	function set_theme() {
+		const new_theme = current_theme === 'emerald' ? 'night' : 'emerald';
 		if (themes.includes(new_theme)) {
 			const one_year = 60 * 60 * 24 * 365;
 			window.localStorage.setItem('theme', new_theme);
@@ -43,9 +42,8 @@
 			<input
 				type="checkbox"
 				class="theme-controller"
-				bind:value="{current_theme}"
-				on:change="{set_theme}"
-				checked="{current_theme === 'dark'}"
+				bind:checked={isDarkTheme}
+				on:change={() => set_theme()}
 			/>
 			<!-- sun icon -->
 			<svg
@@ -70,12 +68,9 @@
 		</label>
 	</div>
 	<div class="flex-none">
-		<select
-			bind:value="{$locale}"
-			class="select select-primary w-full max-w-xs"
-		>
+		<select bind:value={$locale} class="select select-primary w-full max-w-xs">
 			{#each $locales as value}
-				<option value="{value}">{$t(`lang.${value}`)}</option>
+				<option value={value}>{$t(`lang.${value}`)}</option>
 			{/each}
 		</select>
 	</div>
@@ -92,7 +87,7 @@
 			target="_blank"
 			class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
 		>
-			<img src="{logo}" class="h-8" alt="GCA Logo" />
+			<img src={logo} class="h-8" alt="GCA Logo" />
 		</a>
 	</aside>
 	<nav class="grid-flow-col justify-self-end space-x-3">
