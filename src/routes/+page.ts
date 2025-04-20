@@ -8,8 +8,11 @@ export async function load({ fetch, url }) {
 	const competitions = deResponse.items;
 
 	const today = new Date();
+	today.setHours(0, 0, 0, 0);
 	const dynamicDate = new Date();
 	dynamicDate.setDate(dynamicDate.getDate() + days);
+
+	console.log('today', today);
 
 	const filteredCompetitions = competitions
 		.filter((comp: any) => {
