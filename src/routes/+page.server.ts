@@ -10,7 +10,7 @@ interface Competition {
 	id: string;
 	name: string;
 	date: CompetitionDate;
-	[key: string]: any;
+	[key: string]: unknown;
 }
 
 interface WCAApiResponse {

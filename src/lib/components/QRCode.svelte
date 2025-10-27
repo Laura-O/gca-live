@@ -4,15 +4,20 @@
 
 	export let url: string; // URL to encode in the QR code
 	let qrCodeDataUrl: string | undefined;
+	let hasError = false;
 
 	// Generate the QR code when the URL changes (only in browser)
 	$: if (browser && url) {
 		QRCode.toDataURL(url, { errorCorrectionLevel: 'H' })
 			.then((dataUrl: string) => {
 				qrCodeDataUrl = dataUrl;
+				hasError = false;
 			})
-			.catch((err) => {
-				console.error(err);
+			.catch((_err) => {
+				// In production, you might want to send this to an error tracking service
+				// like Sentry or LogRocket
+				hasError = true;
+				qrCodeDataUrl = undefined;
 			});
 	}
 
@@ -30,7 +35,11 @@
 </script>
 
 <div class="flex flex-col items-center">
-	{#if qrCodeDataUrl}
+	{#if hasError}
+		<div class="alert alert-error">
+			<span>Failed to generate QR code. Please try again later.</span>
+		</div>
+	{:else if qrCodeDataUrl}
 		<img src={qrCodeDataUrl} alt="QR Code" />
 		<button class="btn" on:click={downloadQRCode}>Download PNG</button>
 	{:else}

@@ -1,9 +1,13 @@
 <!-- src/lib/CompetitionCard.svelte -->
 <script lang="ts">
 	import { t } from '$lib/translations';
-	export let competition;
-	export let showQRButton: boolean;
+	import type { Competition } from '$lib/types/competition';
+	import { EXTERNAL_URLS } from '$lib/config';
 	import QRCode from '$lib/components/QRCode.svelte';
+
+	export let competition: Competition;
+	export let showQRButton: boolean;
+
 	let isModalOpen = false;
 </script>
 
@@ -19,38 +23,45 @@
 				<a
 					role="button"
 					class="btn btn-primary"
-					href="https://live.worldcubeassociation.org/link/competitions/{competition.id}"
-					target="_blank">WCA Live</a
+					href={EXTERNAL_URLS.wcaLive(competition.id)}
+					target="_blank"
+					rel="noopener noreferrer">WCA Live</a
 				>
 			</li>
 			<li>
 				<a
 					role="button"
 					class="btn btn-primary"
-					href="https://www.competitiongroups.com/competitions/{competition.id}"
-					target="_blank">{$t('content.grouping')}</a
+					href={EXTERNAL_URLS.competitionGroups(competition.id)}
+					target="_blank"
+					rel="noopener noreferrer">{$t('content.grouping')}</a
 				>
 			</li>
 			<li>
 				<a
 					role="button"
 					class="btn btn-primary"
-					href="https://www.worldcubeassociation.org/competitions/{competition.id}#competition-schedule"
-					target="_blank">{$t('content.schedule')}</a
+					href={EXTERNAL_URLS.wcaSchedule(competition.id)}
+					target="_blank"
+					rel="noopener noreferrer">{$t('content.schedule')}</a
 				>
 			</li>
 			<li>
 				<a
 					role="button"
 					class="btn btn-primary"
-					href="https://www.worldcubeassociation.org/competitions/{competition.id}#general-info"
-					target="_blank">{$t('content.info')}</a
+					href={EXTERNAL_URLS.wcaInfo(competition.id)}
+					target="_blank"
+					rel="noopener noreferrer">{$t('content.info')}</a
 				>
 			</li>
 		</ul>
 		{#if showQRButton}
 			<div class="flex justify-end w-full">
-				<button class="modal-button" on:click={() => (isModalOpen = true)}
+				<button
+					class="modal-button"
+					aria-label={$t('content.show-qr-code')}
+					on:click={() => (isModalOpen = true)}
 					><svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -77,12 +88,11 @@
 </div>
 <div class="modal" class:modal-open={isModalOpen}>
 	<div class="modal-box">
-		<QRCode
-			url={`https://live.germancubeassociation.de/competitions/${competition.id}`}
-		/>
+		<QRCode url={EXTERNAL_URLS.gcaLive(competition.id)} />
 		<div class="modal-action">
-			<!-- 🔵 set false on click -->
-			<button class="btn" on:click={() => (isModalOpen = false)}>Close</button>
+			<button class="btn" on:click={() => (isModalOpen = false)}
+				>{$t('content.close')}</button
+			>
 		</div>
 	</div>
 </div>
