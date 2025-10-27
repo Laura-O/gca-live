@@ -1,36 +1,40 @@
 <script lang="ts">
 	import { t, locales, locale } from '$lib/translations';
-	import logo from '$lib/assets/logo.png';
-	import { themes } from '$lib/themes';
+	import { THEME_CONFIG, EXTERNAL_URLS } from '$lib/config';
 	import { onMount } from 'svelte';
+
+	// Use WebP with PNG fallback
+	const logoWebP = '/logo.webp';
+	const logoPNG = '/logo.png';
 
 	import '../app.css';
 
 	export let data;
 
-	let current_theme = data.theme || 'emerald';
-	let isDarkTheme: boolean = current_theme === 'night';
+	const { themes, defaultTheme, darkTheme, cookieMaxAge } = THEME_CONFIG;
+	type Theme = (typeof THEME_CONFIG.themes)[number];
+
+	let current_theme: Theme = (data.theme as Theme) || defaultTheme;
+	let isDarkTheme: boolean = current_theme === darkTheme;
 
 	onMount(() => {
 		if (typeof window !== 'undefined') {
 			// Apply the theme from server-side load
 			if (current_theme && themes.includes(current_theme)) {
 				document.documentElement.setAttribute('data-theme', current_theme);
-				isDarkTheme = current_theme === 'night';
+				isDarkTheme = current_theme === darkTheme;
 			}
 		}
 	});
 
 	function set_theme() {
-		const new_theme = current_theme === 'emerald' ? 'night' : 'emerald';
-		if (themes.includes(new_theme)) {
-			const one_year = 60 * 60 * 24 * 365;
-			window.localStorage.setItem('theme', new_theme);
-			document.cookie = `theme=${new_theme}; max-age=${one_year}; path=/; SameSite=Strict;`;
-			document.documentElement.setAttribute('data-theme', new_theme);
-			current_theme = new_theme;
-			isDarkTheme = new_theme === 'night';
-		}
+		const new_theme: Theme =
+			current_theme === defaultTheme ? darkTheme : defaultTheme;
+		window.localStorage.setItem('theme', new_theme);
+		document.cookie = `theme=${new_theme}; max-age=${cookieMaxAge}; path=/; SameSite=Strict;`;
+		document.documentElement.setAttribute('data-theme', new_theme);
+		current_theme = new_theme;
+		isDarkTheme = new_theme === darkTheme;
 	}
 </script>
 
@@ -39,12 +43,13 @@
 		<a class="btn btn-ghost text-xl" href="/">GCA Live</a>
 	</div>
 	<div class="flex-none mr-2">
-		<label class="swap swap-rotate">
+		<label class="swap swap-rotate" aria-label="Toggle theme">
 			<input
 				type="checkbox"
 				class="theme-controller"
 				bind:checked={isDarkTheme}
 				on:change={() => set_theme()}
+				aria-label="Toggle dark mode"
 			/>
 			<!-- sun icon -->
 			<svg
@@ -69,7 +74,13 @@
 		</label>
 	</div>
 	<div class="flex-none">
-		<select bind:value={$locale} class="select select-primary w-full max-w-xs">
+		<label for="language-select" class="sr-only">Select language</label>
+		<select
+			id="language-select"
+			bind:value={$locale}
+			class="select select-primary w-full max-w-xs"
+			aria-label="Language selector"
+		>
 			{#each $locales as value}
 				<option value={value}>{$t(`lang.${value}`)}</option>
 			{/each}
@@ -84,15 +95,24 @@
 >
 	<aside class="grid-flow-col">
 		<a
-			href="https://www.germancubeassociation.de/"
+			href={EXTERNAL_URLS.gcaWebsite}
 			target="_blank"
+			rel="noopener noreferrer"
 			class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
 		>
-			<img src={logo} class="h-8" alt="GCA Logo" />
+			<picture>
+				<source srcset={logoWebP} type="image/webp" />
+				<img src={logoPNG} class="h-8" alt="GCA Logo" loading="lazy" />
+			</picture>
 		</a>
 	</aside>
 	<nav class="grid-flow-col justify-self-end space-x-3">
-		<a href="https://www.instagram.com/germancubeassociation/" target="_blank">
+		<a
+			href={EXTERNAL_URLS.instagram}
+			target="_blank"
+			rel="noopener noreferrer"
+			aria-label="Visit us on Instagram"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="25"
@@ -106,7 +126,12 @@
 				></path>
 			</svg>
 		</a>
-		<a href="https://discord.gg/wvSPg8k9" target="_blank">
+		<a
+			href={EXTERNAL_URLS.discord}
+			target="_blank"
+			rel="noopener noreferrer"
+			aria-label="Join us on Discord"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="25"

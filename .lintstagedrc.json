@@ -1,8 +1,10 @@
 {
-    "*.{ts}": [
+    "*.{js,ts}": [
+        "eslint --fix",
         "prettier --write"
     ],
     "*.{svelte}": [
+        "eslint --fix",
         "prettier --write",
         "svelte-check"
     ]

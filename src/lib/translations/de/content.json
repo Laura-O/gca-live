@@ -5,5 +5,15 @@
 	"info": "Informationen",
 	"nocomps-title": "Keine Wettbewerbe",
 	"nocomps-content": "Leider gibt es in den nächsten 7 Tagen keine Wettbewerbe in Deutschland.",
-	"wca-page": "WCA-Seite"
+	"wca-page": "WCA-Seite",
+	"show-qr-code": "QR-Code anzeigen",
+	"close": "Schließen",
+	"days-label": "Wettbewerbe für die nächsten:",
+	"days-7": "7 Tage",
+	"days-30": "30 Tage",
+	"days-90": "90 Tage",
+	"error-404": "Seite nicht gefunden",
+	"error-500": "Interner Serverfehler",
+	"back-home": "Zurück zur Startseite",
+	"loading": "Wird geladen..."
 }
