@@ -21,16 +21,16 @@ export default {
 				},
 				// Accent colors for highlights
 				accent: {
-					50: '#fdf4ff',
-					100: '#fae8ff',
-					200: '#f5d0fe',
-					300: '#f0abfc',
-					400: '#e879f9',
-					500: '#d946ef',
-					600: '#c026d3',
-					700: '#a21caf',
-					800: '#86198f',
-					900: '#701a75'
+					50: '#fef2f2',
+					100: '#fee2e2',
+					200: '#fecaca',
+					300: '#fca5a5',
+					400: '#f87171',
+					500: '#ef4444',
+					600: '#dc2626',
+					700: '#b91c1c',
+					800: '#991b1b',
+					900: '#7f1d1d'
 				},
 				// Modern neutral palette
 				neutral: {
@@ -47,25 +47,18 @@ export default {
 					950: '#0a0a0a'
 				}
 			},
-			// Modern gradient presets
+			// Gradient presets
 			backgroundImage: {
-				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-conic':
-					'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
 				'gradient-primary': 'linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%)',
-				'gradient-accent': 'linear-gradient(135deg, #d946ef 0%, #a21caf 100%)',
-				'gradient-mesh':
-					'radial-gradient(at 40% 20%, #0ea5e9 0px, transparent 50%), radial-gradient(at 80% 0%, #d946ef 0px, transparent 50%), radial-gradient(at 0% 50%, #0369a1 0px, transparent 50%)'
+				'gradient-accent': 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)'
 			},
 			// Modern shadow system
 			boxShadow: {
-				soft: '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
-				glow: '0 0 15px rgba(14, 165, 233, 0.5)',
-				'glow-accent': '0 0 15px rgba(217, 70, 239, 0.5)',
+				soft: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
 				'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
-				card: '0 1px 3px rgba(0, 0, 0, 0.05), 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 20px 25px -5px rgba(0, 0, 0, 0.04)',
+				card: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
 				'card-hover':
-					'0 10px 40px -10px rgba(14, 165, 233, 0.3), 0 20px 50px -10px rgba(0, 0, 0, 0.2)'
+					'0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
 			},
 			// Design tokens for consistent spacing
 			spacing: {
@@ -138,7 +131,7 @@ export default {
 				light: {
 					primary: '#0ea5e9',
 					'primary-content': '#ffffff',
-					secondary: '#d946ef',
+					secondary: '#ef4444',
 					'secondary-content': '#ffffff',
 					accent: '#0369a1',
 					'accent-content': '#ffffff',
@@ -156,8 +149,8 @@ export default {
 				dark: {
 					primary: '#38bdf8',
 					'primary-content': '#0c4a6e',
-					secondary: '#e879f9',
-					'secondary-content': '#701a75',
+					secondary: '#f87171',
+					'secondary-content': '#7f1d1d',
 					accent: '#0ea5e9',
 					'accent-content': '#082f49',
 					neutral: '#171717',
@@ -169,7 +162,7 @@ export default {
 					info: '#38bdf8',
 					success: '#34d399',
 					warning: '#fbbf24',
-					error: '#f87171'
+					error: '#fca5a5'
 				}
 			}
 		]

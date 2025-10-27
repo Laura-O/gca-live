@@ -55,27 +55,40 @@
 				{competition.name}
 			</a>
 		</h2>
-		<ul class="my-4 space-y-3 flex flex-col items-center">
-			<li>
-				<LinkButton href={EXTERNAL_URLS.wcaLive(competition.id)} external>
+		<ul class="my-4 space-y-3 flex flex-col items-center w-full">
+			<li class="w-full max-w-xs">
+				<LinkButton
+					href={EXTERNAL_URLS.wcaLive(competition.id)}
+					external
+					className="w-full"
+				>
 					WCA Live
 				</LinkButton>
 			</li>
-			<li>
+			<li class="w-full max-w-xs">
 				<LinkButton
 					href={EXTERNAL_URLS.competitionGroups(competition.id)}
 					external
+					className="w-full"
 				>
 					{$t('content.grouping')}
 				</LinkButton>
 			</li>
-			<li>
-				<LinkButton href={EXTERNAL_URLS.wcaSchedule(competition.id)} external>
+			<li class="w-full max-w-xs">
+				<LinkButton
+					href={EXTERNAL_URLS.wcaSchedule(competition.id)}
+					external
+					className="w-full"
+				>
 					{$t('content.schedule')}
 				</LinkButton>
 			</li>
-			<li>
-				<LinkButton href={EXTERNAL_URLS.wcaInfo(competition.id)} external>
+			<li class="w-full max-w-xs">
+				<LinkButton
+					href={EXTERNAL_URLS.wcaInfo(competition.id)}
+					external
+					className="w-full"
+				>
 					{$t('content.info')}
 				</LinkButton>
 			</li>
@@ -83,7 +96,7 @@
 		{#if showQRButton}
 			<div class="flex justify-end w-full mt-4">
 				<button
-					class="p-3 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-white hover:shadow-glow transition-all duration-300 hover:scale-110"
+					class="p-3 rounded-xl bg-primary text-white hover:bg-primary-600 transition-all duration-200 shadow-soft hover:shadow-card-hover"
 					aria-label={$t('content.show-qr-code')}
 					on:click={() => (isModalOpen = true)}
 					><svg
@@ -115,7 +128,7 @@
 		<QRCode url={EXTERNAL_URLS.gcaLive(competition.id)} />
 		<div class="modal-action">
 			<button
-				class="btn btn-primary shadow-soft hover:shadow-glow hover:scale-105 transition-all duration-300"
+				class="btn btn-primary shadow-soft hover:shadow-card-hover transition-all duration-200"
 				on:click={closeModal}
 			>
 				{$t('content.close')}

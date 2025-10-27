@@ -7,13 +7,12 @@
 	export let className: string = '';
 
 	const variantClasses = {
-		primary: 'btn-primary shadow-soft hover:shadow-glow hover:scale-105',
-		secondary:
-			'btn-secondary shadow-soft hover:shadow-glow-accent hover:scale-105',
+		primary: 'btn-primary shadow-soft hover:shadow-card-hover',
+		secondary: 'btn-secondary shadow-soft hover:shadow-card-hover',
 		ghost: 'btn-ghost hover:bg-base-200'
 	};
 
-	const computedClasses = `btn ${variantClasses[variant]} transition-all duration-300 ${className}`;
+	const computedClasses = `btn ${variantClasses[variant]} transition-all duration-200 ${className}`;
 </script>
 
 <a

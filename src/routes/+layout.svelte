@@ -41,14 +41,12 @@
 	}
 </script>
 
-<!-- Gradient background mesh -->
-<div
-	class="fixed inset-0 bg-gradient-to-br from-base-100 via-primary-50/30 to-accent-50/30 dark:from-base-100 dark:via-primary-950/50 dark:to-accent-950/50 pointer-events-none -z-10"
-></div>
+<!-- Subtle background -->
+<div class="fixed inset-0 bg-base-100 pointer-events-none -z-10"></div>
 
 <a
 	href="#main-content"
-	class="sr-only focus:not-sr-only focus:absolute focus:z-skip-link focus:p-4 focus:bg-gradient-primary focus:text-white focus:rounded-lg focus:top-4 focus:left-4 focus:shadow-glow"
+	class="sr-only focus:not-sr-only focus:absolute focus:z-skip-link focus:p-4 focus:bg-primary focus:text-white focus:rounded-lg focus:top-4 focus:left-4 focus:shadow-soft"
 >
 	{$t('content.skip-to-content') || 'Skip to main content'}
 </a>

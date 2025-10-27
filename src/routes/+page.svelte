@@ -58,7 +58,7 @@
 		</label>
 		<select
 			id="days"
-			class="select select-bordered select-primary w-full max-w-xs shadow-soft transition-all duration-300 hover:shadow-glow focus:shadow-glow focus:scale-105"
+			class="select select-bordered select-primary w-full max-w-xs shadow-soft transition-all duration-200 focus:shadow-card-hover"
 			on:change={updateDays}
 		>
 			<option value="7" selected={data.days === 7}
