@@ -290,8 +290,9 @@ function createReadableStream(file) {
 function init(manifest) {
 	const server = new Server(manifest);
 
+	/** @type {Promise<void> | null} */
 	let init_promise = server.init({
-		env: process.env,
+		env: /** @type {Record<string, string>} */ (process.env),
 		read: (file) => createReadableStream(`.netlify/server/${file}`)
 	});
 
@@ -304,7 +305,7 @@ function init(manifest) {
 		const response = await server.respond(to_request(event), {
 			platform: { context },
 			getClientAddress() {
-				return event.headers['x-nf-client-connection-ip'];
+				return /** @type {string} */ (event.headers['x-nf-client-connection-ip']);
 			}
 		});
 
@@ -335,13 +336,11 @@ function init(manifest) {
  * @param {import('@netlify/functions').HandlerEvent} event
  * @returns {Request}
  */
-function to_request(event) {
-	const { httpMethod, headers, rawUrl, body, isBase64Encoded } = event;
-
+function to_request({ httpMethod, headers, rawUrl, body, isBase64Encoded }) {
 	/** @type {RequestInit} */
 	const init = {
 		method: httpMethod,
-		headers: new Headers(headers)
+		headers: new Headers(/** @type {Record<string, string>} */ (headers))
 	};
 
 	if (httpMethod !== 'GET' && httpMethod !== 'HEAD') {

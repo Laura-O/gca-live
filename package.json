@@ -57,6 +57,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"focus-trap": "^7.6.6",
 		"qrcode": "^1.5.4",
 		"sveltekit-i18n": "^2.4.2"
 	},

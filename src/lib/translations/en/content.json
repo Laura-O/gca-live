@@ -15,5 +15,7 @@
 	"error-404": "Page not found",
 	"error-500": "Internal server error",
 	"back-home": "Go back home",
-	"loading": "Loading..."
+	"loading": "Loading...",
+	"skip-to-content": "Skip to main content",
+	"qr-downloaded": "QR code downloaded successfully!"
 }

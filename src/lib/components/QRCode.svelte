@@ -1,6 +1,8 @@
 <script lang="ts">
 	import QRCode from 'qrcode';
 	import { browser } from '$app/environment';
+	import { toasts } from '$lib/stores/toast';
+	import { t } from '$lib/translations';
 
 	export let url: string; // URL to encode in the QR code
 	let qrCodeDataUrl: string | undefined;
@@ -30,6 +32,10 @@
 			document.body.appendChild(link);
 			link.click(); // Programmatically click the link to trigger the download
 			document.body.removeChild(link); // Clean up
+			toasts.show(
+				$t('content.qr-downloaded') || 'QR code downloaded successfully!',
+				'success'
+			);
 		}
 	}
 </script>
