@@ -6,17 +6,17 @@
 
 	import '../app.css';
 
-	let current_theme = 'emerald';
+	export let data;
+
+	let current_theme = data.theme || 'emerald';
 	let isDarkTheme: boolean = current_theme === 'night';
 
 	onMount(() => {
 		if (typeof window !== 'undefined') {
-			const theme = window.localStorage.getItem('theme');
-			console.log('theme', theme);
-			if (theme && themes.includes(theme)) {
-				console.log('setting theme', theme);
-				document.documentElement.setAttribute('data-theme', theme);
-				current_theme = theme;
+			// Apply the theme from server-side load
+			if (current_theme && themes.includes(current_theme)) {
+				document.documentElement.setAttribute('data-theme', current_theme);
+				isDarkTheme = current_theme === 'night';
 			}
 		}
 	});
@@ -29,6 +29,7 @@
 			document.cookie = `theme=${new_theme}; max-age=${one_year}; path=/; SameSite=Strict;`;
 			document.documentElement.setAttribute('data-theme', new_theme);
 			current_theme = new_theme;
+			isDarkTheme = new_theme === 'night';
 		}
 	}
 </script>

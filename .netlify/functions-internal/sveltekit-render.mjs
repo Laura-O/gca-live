@@ -1,0 +1,46 @@
+import { init } from '../serverless.js';
+
+export const handler = init((() => {
+function __memo(fn) {
+	let value;
+	return () => value ??= (value = fn());
+}
+
+return {
+	appDir: "_app",
+	appPath: "_app",
+	assets: new Set(["favicon.png"]),
+	mimeTypes: {".png":"image/png"},
+	_: {
+		client: {start:"_app/immutable/entry/start.C6QuBo-I.js",app:"_app/immutable/entry/app.o5WmHsMX.js",imports:["_app/immutable/entry/start.C6QuBo-I.js","_app/immutable/chunks/CZXxJ09R.js","_app/immutable/chunks/BC38UvDJ.js","_app/immutable/chunks/Dj0Ezt28.js","_app/immutable/entry/app.o5WmHsMX.js","_app/immutable/chunks/rFwERVDk.js","_app/immutable/chunks/BC38UvDJ.js","_app/immutable/chunks/CA5ZZZK2.js","_app/immutable/chunks/BFYHp4eA.js","_app/immutable/chunks/Dj0Ezt28.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		nodes: [
+			__memo(() => import('../server/nodes/0.js')),
+			__memo(() => import('../server/nodes/1.js')),
+			__memo(() => import('../server/nodes/2.js')),
+			__memo(() => import('../server/nodes/3.js'))
+		],
+		routes: [
+			{
+				id: "/",
+				pattern: /^\/$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 2 },
+				endpoint: null
+			},
+			{
+				id: "/competitions/[id]",
+				pattern: /^\/competitions\/([^/]+?)\/?$/,
+				params: [{"name":"id","optional":false,"rest":false,"chained":false}],
+				page: { layouts: [0,], errors: [1,], leaf: 3 },
+				endpoint: null
+			}
+		],
+		prerendered_routes: new Set([]),
+		matchers: async () => {
+			
+			return {  };
+		},
+		server_assets: {}
+	}
+}
+})());
