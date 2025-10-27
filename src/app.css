@@ -1,3 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	/* Modern typography */
+	html {
+		font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+		font-variation-settings: normal;
+	}
+
+	body {
+		@apply antialiased;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+}
+
+@layer components {
+	/* Glassmorphism utility classes */
+	.glass {
+		@apply backdrop-blur-xl bg-white/70 dark:bg-neutral-900/70;
+		-webkit-backdrop-filter: blur(20px);
+	}
+
+	.glass-card {
+		@apply backdrop-blur-lg bg-white/80 dark:bg-neutral-900/80 border border-white/20 dark:border-neutral-700/20;
+		-webkit-backdrop-filter: blur(16px);
+	}
+
+	/* Modern gradient text */
+	.gradient-text {
+		@apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+	}
+
+	/* Modern card with depth */
+	.modern-card {
+		@apply relative bg-base-100 rounded-2xl shadow-card transition-all duration-300;
+		@apply hover:shadow-card-hover;
+	}
+
+	.modern-card::before {
+		content: '';
+		@apply absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300;
+		background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(217, 70, 239, 0.1) 100%);
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.modern-card:hover::before {
+		@apply opacity-100;
+	}
+
+	.modern-card > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Gradient border effect */
+	.gradient-border {
+		@apply relative;
+	}
+
+	.gradient-border::before {
+		content: '';
+		@apply absolute inset-0 rounded-xl p-[2px];
+		background: linear-gradient(135deg, #0ea5e9, #d946ef);
+		-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+		mask-composite: exclude;
+	}
+
+	/* Shimmer loading effect */
+	.shimmer {
+		@apply relative overflow-hidden;
+	}
+
+	.shimmer::after {
+		content: '';
+		@apply absolute inset-0;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+		animation: shimmer 2s infinite;
+	}
+
+	/* Modern button with gradient */
+	.btn-modern {
+		@apply relative overflow-hidden transition-all duration-300;
+		@apply hover:shadow-glow hover:scale-105;
+	}
+
+	.btn-modern::before {
+		content: '';
+		@apply absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-400 opacity-0 transition-opacity duration-300;
+	}
+
+	.btn-modern:hover::before {
+		@apply opacity-100;
+	}
+}
+
+@layer utilities {
+	/* Gradient backgrounds */
+	.bg-gradient-mesh {
+		background:
+			radial-gradient(at 40% 20%, rgba(14, 165, 233, 0.3) 0px, transparent 50%),
+			radial-gradient(at 80% 0%, rgba(217, 70, 239, 0.3) 0px, transparent 50%),
+			radial-gradient(at 0% 50%, rgba(3, 105, 161, 0.3) 0px, transparent 50%);
+	}
+
+	/* Text shadows for depth */
+	.text-shadow {
+		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	.text-shadow-lg {
+		text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	}
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}

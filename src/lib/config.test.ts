@@ -76,13 +76,13 @@ describe('Configuration', () => {
 	describe('THEME_CONFIG', () => {
 		it('should have two themes', () => {
 			expect(THEME_CONFIG.themes).toHaveLength(2);
-			expect(THEME_CONFIG.themes).toContain('emerald');
-			expect(THEME_CONFIG.themes).toContain('night');
+			expect(THEME_CONFIG.themes).toContain('light');
+			expect(THEME_CONFIG.themes).toContain('dark');
 		});
 
 		it('should have correct default theme', () => {
-			expect(THEME_CONFIG.defaultTheme).toBe('emerald');
-			expect(THEME_CONFIG.darkTheme).toBe('night');
+			expect(THEME_CONFIG.defaultTheme).toBe('light');
+			expect(THEME_CONFIG.darkTheme).toBe('dark');
 		});
 
 		it('should have correct cookie max age', () => {

@@ -98,17 +98,17 @@ export const THEME_CONFIG = {
 	/**
 	 * Available themes
 	 */
-	themes: ['emerald', 'night'] as const,
+	themes: ['light', 'dark'] as const,
 
 	/**
 	 * Default light theme
 	 */
-	defaultTheme: 'emerald' as const,
+	defaultTheme: 'light' as const,
 
 	/**
 	 * Dark theme
 	 */
-	darkTheme: 'night' as const,
+	darkTheme: 'dark' as const,
 
 	/**
 	 * Cookie max age (1 year in seconds)

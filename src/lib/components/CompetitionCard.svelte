@@ -4,62 +4,86 @@
 	import type { Competition } from '$lib/types/competition';
 	import { EXTERNAL_URLS } from '$lib/config';
 	import QRCode from '$lib/components/QRCode.svelte';
+	import LinkButton from '$lib/components/LinkButton.svelte';
+	import { createFocusTrap } from 'focus-trap';
 
 	export let competition: Competition;
 	export let showQRButton: boolean;
 
 	let isModalOpen = false;
+	let modalElement: HTMLDivElement;
+	let focusTrap: ReturnType<typeof createFocusTrap> | null = null;
+
+	$: if (isModalOpen && modalElement) {
+		activateFocusTrap();
+	} else if (focusTrap) {
+		deactivateFocusTrap();
+	}
+
+	function activateFocusTrap() {
+		if (!focusTrap && modalElement) {
+			focusTrap = createFocusTrap(modalElement, {
+				escapeDeactivates: true,
+				clickOutsideDeactivates: true,
+				onDeactivate: () => {
+					isModalOpen = false;
+				}
+			});
+			focusTrap.activate();
+		}
+	}
+
+	function deactivateFocusTrap() {
+		if (focusTrap) {
+			focusTrap.deactivate();
+			focusTrap = null;
+		}
+	}
+
+	function closeModal() {
+		isModalOpen = false;
+	}
 </script>
 
-<div class="card-compact bg-base-100 w-96 shadow">
-	<div class="card-body items-center text-center">
-		<h2 class="card-title">
-			<a href={`/competitions/${competition.id}`}>
+<div class="modern-card w-full max-w-card overflow-hidden group">
+	<div class="card-body items-center text-center p-6">
+		<h2 class="card-title text-xl font-semibold mb-4">
+			<a
+				href={`/competitions/${competition.id}`}
+				class="hover:gradient-text transition-all duration-300"
+			>
 				{competition.name}
 			</a>
 		</h2>
 		<ul class="my-4 space-y-3 flex flex-col items-center">
 			<li>
-				<a
-					role="button"
-					class="btn btn-primary"
-					href={EXTERNAL_URLS.wcaLive(competition.id)}
-					target="_blank"
-					rel="noopener noreferrer">WCA Live</a
-				>
+				<LinkButton href={EXTERNAL_URLS.wcaLive(competition.id)} external>
+					WCA Live
+				</LinkButton>
 			</li>
 			<li>
-				<a
-					role="button"
-					class="btn btn-primary"
+				<LinkButton
 					href={EXTERNAL_URLS.competitionGroups(competition.id)}
-					target="_blank"
-					rel="noopener noreferrer">{$t('content.grouping')}</a
+					external
 				>
+					{$t('content.grouping')}
+				</LinkButton>
 			</li>
 			<li>
-				<a
-					role="button"
-					class="btn btn-primary"
-					href={EXTERNAL_URLS.wcaSchedule(competition.id)}
-					target="_blank"
-					rel="noopener noreferrer">{$t('content.schedule')}</a
-				>
+				<LinkButton href={EXTERNAL_URLS.wcaSchedule(competition.id)} external>
+					{$t('content.schedule')}
+				</LinkButton>
 			</li>
 			<li>
-				<a
-					role="button"
-					class="btn btn-primary"
-					href={EXTERNAL_URLS.wcaInfo(competition.id)}
-					target="_blank"
-					rel="noopener noreferrer">{$t('content.info')}</a
-				>
+				<LinkButton href={EXTERNAL_URLS.wcaInfo(competition.id)} external>
+					{$t('content.info')}
+				</LinkButton>
 			</li>
 		</ul>
 		{#if showQRButton}
-			<div class="flex justify-end w-full">
+			<div class="flex justify-end w-full mt-4">
 				<button
-					class="modal-button"
+					class="p-3 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-white hover:shadow-glow transition-all duration-300 hover:scale-110"
 					aria-label={$t('content.show-qr-code')}
 					on:click={() => (isModalOpen = true)}
 					><svg
@@ -86,13 +110,16 @@
 		{/if}
 	</div>
 </div>
-<div class="modal" class:modal-open={isModalOpen}>
-	<div class="modal-box">
+<div class="modal" class:modal-open={isModalOpen} bind:this={modalElement}>
+	<div class="modal-box glass-card">
 		<QRCode url={EXTERNAL_URLS.gcaLive(competition.id)} />
 		<div class="modal-action">
-			<button class="btn" on:click={() => (isModalOpen = false)}
-				>{$t('content.close')}</button
+			<button
+				class="btn btn-primary shadow-soft hover:shadow-glow hover:scale-105 transition-all duration-300"
+				on:click={closeModal}
 			>
+				{$t('content.close')}
+			</button>
 		</div>
 	</div>
 </div>

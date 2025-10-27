@@ -1,4 +1,4 @@
-import { a as loadTranslations } from "../../chunks/translations.js";
+import { b as loadTranslations } from "../../chunks/translations.js";
 const load = async ({ url, data }) => {
   const { pathname } = url;
   const initLocale = data.locale || "de";

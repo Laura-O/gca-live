@@ -1,4 +1,4 @@
-import { e as error } from "../../chunks/index.js";
+import { error } from "@sveltejs/kit";
 const load = async ({ fetch, url }) => {
   const daysParam = url.searchParams.get("days");
   const days = daysParam ? parseInt(daysParam, 10) : 7;
@@ -38,7 +38,10 @@ const load = async ({ fetch, url }) => {
     if (err && typeof err === "object" && "status" in err) {
       throw err;
     }
-    throw error(500, "An unexpected error occurred while fetching competitions");
+    throw error(
+      500,
+      "An unexpected error occurred while fetching competitions"
+    );
   }
 };
 export {

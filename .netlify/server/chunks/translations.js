@@ -1,4 +1,4 @@
-import { w as writable, g as get, d as derived } from "./index2.js";
+import { w as writable, g as get, d as derived } from "./index.js";
 import C$1 from "@sveltekit-i18n/parser-default";
 var H = Object.defineProperty, q = Object.defineProperties;
 var B = Object.getOwnPropertyDescriptors;
@@ -260,7 +260,8 @@ const { t: t2, locale, locales, loading, loadTranslations } = new D(
   config
 );
 export {
-  loadTranslations as a,
+  locale as a,
+  loadTranslations as b,
   locales as l,
   t2 as t
 };
