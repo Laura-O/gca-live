@@ -124,7 +124,7 @@ export default {
 			}
 		}
 	},
-	plugins: [require('daisyui')],
+	plugins: [],
 	daisyui: {
 		themes: [
 			{
