@@ -4,6 +4,7 @@
 	import { EXTERNAL_URLS } from '$lib/config';
 	import CompetitionCard from '$lib/components/CompetitionCard.svelte';
 	import LinkButton from '$lib/components/LinkButton.svelte';
+	import RubiksCube from '$lib/components/RubiksCube.svelte';
 	import SEO from '$lib/components/SEO.svelte';
 	export let data;
 
@@ -34,7 +35,9 @@
 		{#if data.competitions.length === 0}
 			<div class="col-span-full">
 				<div class="modern-card w-full max-w-2xl mx-auto p-8 text-center">
-					<div class="text-6xl mb-4">🎲</div>
+					<div class="mb-6">
+						<RubiksCube size={80} />
+					</div>
 					<h2 class="text-2xl font-bold mb-4">{$t('content.nocomps-title')}</h2>
 					<p class="text-base-content/70 mb-6">
 						{$t('content.nocomps-content')}
