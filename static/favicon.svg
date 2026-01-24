@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <text x="50%" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" text-anchor="middle">
+    <tspan fill="#000000">G</tspan><tspan fill="#dd0000">C</tspan><tspan fill="#ffcc00">A</tspan>
+  </text>
+  <!-- Small pulsing dot -->
+  <circle cx="28" cy="6" r="4" fill="#dd0000">
+    <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>
