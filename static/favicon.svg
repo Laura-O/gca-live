@@ -1,9 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <text x="50%" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" text-anchor="middle">
-    <tspan fill="#000000">G</tspan><tspan fill="#dd0000">C</tspan><tspan fill="#ffcc00">A</tspan>
-  </text>
-  <!-- Small pulsing dot -->
-  <circle cx="28" cy="6" r="4" fill="#dd0000">
-    <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
-  </circle>
+  <!-- 3x3 cube face in German flag colors -->
+  <!-- Row 1 - Black -->
+  <rect x="2" y="2" width="8" height="8" rx="1" fill="#000000"/>
+  <rect x="12" y="2" width="8" height="8" rx="1" fill="#000000"/>
+  <rect x="22" y="2" width="8" height="8" rx="1" fill="#000000"/>
+  <!-- Row 2 - Red -->
+  <rect x="2" y="12" width="8" height="8" rx="1" fill="#dd0000"/>
+  <rect x="12" y="12" width="8" height="8" rx="1" fill="#dd0000"/>
+  <rect x="22" y="12" width="8" height="8" rx="1" fill="#dd0000"/>
+  <!-- Row 3 - Gold -->
+  <rect x="2" y="22" width="8" height="8" rx="1" fill="#ffcc00"/>
+  <rect x="12" y="22" width="8" height="8" rx="1" fill="#ffcc00"/>
+  <rect x="22" y="22" width="8" height="8" rx="1" fill="#ffcc00"/>
 </svg>
