@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { Competition } from '$lib/types/competition';
-import { db } from '$lib/server/db';
+import { getDb } from '$lib/server/db';
 import { wcaCompetitions } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 
@@ -13,7 +13,7 @@ export const GET: RequestHandler = async ({ params }) => {
 	}
 
 	try {
-		const results = await db
+		const results = await getDb()
 			.select()
 			.from(wcaCompetitions)
 			.where(eq(wcaCompetitions.id, id))

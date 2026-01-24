@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import type { Competition } from '$lib/types/competition';
-import { db } from '$lib/server/db';
+import { getDb } from '$lib/server/db';
 import { wcaCompetitions } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 
@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	const { id } = params;
 
 	try {
-		const results = await db
+		const results = await getDb()
 			.select()
 			.from(wcaCompetitions)
 			.where(eq(wcaCompetitions.id, id))

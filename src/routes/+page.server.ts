@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import type { Competition } from '$lib/types/competition';
 import { API_CONFIG } from '$lib/config';
-import { db } from '$lib/server/db';
+import { getDb } from '$lib/server/db';
 import { wcaCompetitions } from '$lib/server/db/schema';
 import { eq, gte, lte, and } from 'drizzle-orm';
 
@@ -25,7 +25,7 @@ export const load: PageServerLoad = async ({ url }) => {
 		const todayStr = today.toISOString().split('T')[0];
 		const cutoffStr = cutoff.toISOString().split('T')[0];
 
-		const results = await db
+		const results = await getDb()
 			.select()
 			.from(wcaCompetitions)
 			.where(
