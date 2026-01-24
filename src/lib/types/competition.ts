@@ -7,7 +7,11 @@ export interface Competition {
 	id: string;
 	name: string;
 	date: CompetitionDateRange;
-	[key: string]: unknown;
+	city?: string;
+	venue?: string;
+	venueAddress?: string;
+	latitude?: number;
+	longitude?: number;
 }
 
 export interface CompetitionsResponse {

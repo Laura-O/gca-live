@@ -60,15 +60,9 @@ export const EXTERNAL_URLS = {
  */
 export const API_CONFIG = {
 	/**
-	 * WCA REST API base URL
+	 * Default region for competitions (country name)
 	 */
-	wcaBaseUrl:
-		'https://raw.githubusercontent.com/robiningelbrecht/wca-rest-api/master/api/competitions',
-
-	/**
-	 * Default region for competitions
-	 */
-	defaultRegion: 'DE',
+	defaultRegion: 'Germany',
 
 	/**
 	 * Default number of days to show competitions for
@@ -78,17 +72,7 @@ export const API_CONFIG = {
 	/**
 	 * Maximum number of days allowed
 	 */
-	maxDays: 365,
-
-	/**
-	 * Cache TTL in milliseconds (5 minutes)
-	 */
-	cacheTtl: 5 * 60 * 1000,
-
-	/**
-	 * Request timeout in milliseconds
-	 */
-	requestTimeout: 5000
+	maxDays: 365
 } as const;
 
 /**

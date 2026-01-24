@@ -57,19 +57,9 @@ describe('Configuration', () => {
 
 	describe('API_CONFIG', () => {
 		it('should have correct default values', () => {
-			expect(API_CONFIG.defaultRegion).toBe('DE');
+			expect(API_CONFIG.defaultRegion).toBe('Germany');
 			expect(API_CONFIG.defaultDays).toBe(7);
 			expect(API_CONFIG.maxDays).toBe(365);
-		});
-
-		it('should have correct cache and timeout settings', () => {
-			expect(API_CONFIG.cacheTtl).toBe(5 * 60 * 1000); // 5 minutes
-			expect(API_CONFIG.requestTimeout).toBe(5000); // 5 seconds
-		});
-
-		it('should have valid WCA Base URL', () => {
-			expect(API_CONFIG.wcaBaseUrl).toContain('github');
-			expect(API_CONFIG.wcaBaseUrl).toContain('wca-rest-api');
 		});
 	});
 

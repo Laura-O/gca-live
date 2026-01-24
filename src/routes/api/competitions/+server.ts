@@ -2,47 +2,11 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { Competition } from '$lib/types/competition';
 import { API_CONFIG } from '$lib/config';
+import { getDb } from '$lib/server/db';
+import { wcaCompetitions } from '$lib/server/db/schema';
+import { eq, gte, lte, and } from 'drizzle-orm';
 
-const {
-	wcaBaseUrl,
-	defaultRegion,
-	defaultDays,
-	maxDays,
-	cacheTtl,
-	requestTimeout
-} = API_CONFIG;
-
-type CacheEntry<T> = {
-	data: T;
-	expiresAt: number;
-};
-
-const cache = new Map<string, CacheEntry<Competition[]>>();
-
-function fromCache(key: string): Competition[] | undefined {
-	const hit = cache.get(key);
-	if (!hit) return undefined;
-	if (Date.now() > hit.expiresAt) {
-		cache.delete(key);
-		return undefined;
-	}
-	return hit.data;
-}
-
-function saveCache(key: string, data: Competition[]) {
-	cache.set(key, { data, expiresAt: Date.now() + cacheTtl });
-}
-
-async function fetchWithTimeout(resource: string, timeoutMs: number) {
-	const controller = new AbortController();
-	const timeout = setTimeout(() => controller.abort(), timeoutMs);
-
-	try {
-		return await fetch(resource, { signal: controller.signal });
-	} finally {
-		clearTimeout(timeout);
-	}
-}
+const { defaultRegion, defaultDays, maxDays } = API_CONFIG;
 
 export const GET: RequestHandler = async ({ url }) => {
 	const daysParam = url.searchParams.get('days');
@@ -61,71 +25,56 @@ export const GET: RequestHandler = async ({ url }) => {
 		);
 	}
 
-	const cacheKey = `${region}`.toLowerCase();
-	let competitions = fromCache(cacheKey);
+	try {
+		const today = new Date();
+		today.setHours(0, 0, 0, 0);
+		const cutoff = new Date();
+		cutoff.setDate(cutoff.getDate() + days);
 
-	if (!competitions) {
-		try {
-			const response = await fetchWithTimeout(
-				`${wcaBaseUrl}/${region}.json`,
-				requestTimeout
-			);
+		const todayStr = today.toISOString().split('T')[0];
+		const cutoffStr = cutoff.toISOString().split('T')[0];
 
-			if (!response.ok) {
-				return json(
-					{
-						competitions: [],
-						days,
-						validationError: 'Unable to load competitions at this time.'
-					},
-					{ status: response.status }
-				);
-			}
+		const results = await getDb()
+			.select()
+			.from(wcaCompetitions)
+			.where(
+				and(
+					eq(wcaCompetitions.countryId, region),
+					lte(wcaCompetitions.startDate, cutoffStr),
+					gte(wcaCompetitions.endDate, todayStr)
+				)
+			)
+			.orderBy(wcaCompetitions.startDate);
 
-			const payload = (await response.json()) as { items?: Competition[] };
-			if (!payload?.items || !Array.isArray(payload.items)) {
-				return json(
-					{
-						competitions: [],
-						days,
-						validationError: 'Unexpected response format received from source.'
-					},
-					{ status: 502 }
-				);
-			}
+		const competitions: Competition[] = results.map((row) => ({
+			id: row.id,
+			name: row.name,
+			date: {
+				from: row.startDate ?? '',
+				till: row.endDate ?? ''
+			},
+			city: row.city ?? undefined,
+			venue: row.venue ?? undefined,
+			venueAddress: row.venueAddress ?? undefined,
+			latitude: row.latitudeMicrodegrees
+				? row.latitudeMicrodegrees / 1_000_000
+				: undefined,
+			longitude: row.longitudeMicrodegrees
+				? row.longitudeMicrodegrees / 1_000_000
+				: undefined
+		}));
 
-			competitions = payload.items;
-			saveCache(cacheKey, competitions);
-		} catch (err) {
-			const status =
-				err instanceof DOMException && err.name === 'AbortError' ? 504 : 500;
-			return json(
-				{
-					competitions: [],
-					days,
-					validationError:
-						'Failed to retrieve competitions. Please try again later.'
-				},
-				{ status }
-			);
-		}
-	}
-
-	const today = new Date();
-	today.setHours(0, 0, 0, 0);
-	const cutoff = new Date();
-	cutoff.setDate(cutoff.getDate() + days);
-
-	const filtered = competitions
-		.filter((comp) => {
-			const startDate = new Date(comp.date.from);
-			const endDate = new Date(comp.date.till);
-			return startDate <= cutoff && endDate >= today;
-		})
-		.sort(
-			(a, b) =>
-				new Date(a.date.from).getTime() - new Date(b.date.from).getTime()
+		return json({ competitions, days });
+	} catch (err) {
+		console.error('Database error:', err);
+		return json(
+			{
+				competitions: [],
+				days,
+				validationError:
+					'Failed to retrieve competitions. Please try again later.'
+			},
+			{ status: 500 }
 		);
-
-	return json({ competitions: filtered, days });
+	}
 };
