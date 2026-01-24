@@ -15,8 +15,6 @@
 	type="article"
 />
 
-<div
-	class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-4 place-items-center"
->
+<div class="min-h-[70vh] flex items-center justify-center p-6">
 	<CompetitionCard competition={competition} showQRButton={true} />
 </div>
