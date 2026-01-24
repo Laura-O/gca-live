@@ -35,7 +35,7 @@ describe('Competition Types', () => {
 		expect(response.validationError).toBeUndefined();
 	});
 
-	it('should allow additional properties on Competition due to index signature', () => {
+	it('should allow optional properties on Competition', () => {
 		const competition: Competition = {
 			id: 'test-comp-2025',
 			name: 'Test Competition 2025',
@@ -44,10 +44,16 @@ describe('Competition Types', () => {
 				till: '2025-01-02'
 			},
 			city: 'Berlin',
-			country: 'Germany'
+			venue: 'Test Venue',
+			venueAddress: '123 Test St',
+			latitude: 52.52,
+			longitude: 13.405
 		};
 
 		expect(competition.city).toBe('Berlin');
-		expect(competition.country).toBe('Germany');
+		expect(competition.venue).toBe('Test Venue');
+		expect(competition.venueAddress).toBe('123 Test St');
+		expect(competition.latitude).toBe(52.52);
+		expect(competition.longitude).toBe(13.405);
 	});
 });

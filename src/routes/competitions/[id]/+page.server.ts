@@ -1,16 +1,12 @@
-import { json } from '@sveltejs/kit';
-import type { RequestHandler } from './$types';
+import { error } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 import type { Competition } from '$lib/types/competition';
 import { db } from '$lib/server/db';
 import { wcaCompetitions } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 
-export const GET: RequestHandler = async ({ params }) => {
+export const load: PageServerLoad = async ({ params }) => {
 	const { id } = params;
-
-	if (!id) {
-		return json({ message: 'Competition id is required.' }, { status: 400 });
-	}
 
 	try {
 		const results = await db
@@ -20,7 +16,7 @@ export const GET: RequestHandler = async ({ params }) => {
 			.limit(1);
 
 		if (results.length === 0) {
-			return json({ message: `Competition ${id} not found.` }, { status: 404 });
+			throw error(404, `Competition ${id} not found`);
 		}
 
 		const row = results[0];
@@ -42,12 +38,14 @@ export const GET: RequestHandler = async ({ params }) => {
 				: undefined
 		};
 
-		return json(competition);
+		return {
+			competition
+		};
 	} catch (err) {
+		if (err && typeof err === 'object' && 'status' in err) {
+			throw err;
+		}
 		console.error('Database error:', err);
-		return json(
-			{ message: 'Failed to load competition. Please try again later.' },
-			{ status: 500 }
-		);
+		throw error(500, 'Failed to load competition');
 	}
 };
