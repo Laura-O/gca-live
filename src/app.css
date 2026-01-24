@@ -3,13 +3,11 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
-@plugin "daisyui" {
-	themes: light --default, dark --prefersdark;
-}
+@plugin "daisyui";
 
 /* Light theme - sky blue primary, red secondary */
 @plugin "daisyui/theme" {
-	name: "light";
+	name: "gca-light";
 	default: true;
 	color-scheme: light;
 	--color-base-100: oklch(100% 0 0);
@@ -36,7 +34,7 @@
 
 /* Dark theme - lighter blue primary, coral secondary */
 @plugin "daisyui/theme" {
-	name: "dark";
+	name: "gca-dark";
 	prefersdark: true;
 	color-scheme: dark;
 	--color-base-100: oklch(10.4% 0 0);

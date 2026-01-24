@@ -82,17 +82,17 @@ export const THEME_CONFIG = {
 	/**
 	 * Available themes
 	 */
-	themes: ['light', 'dark'] as const,
+	themes: ['gca-light', 'gca-dark'] as const,
 
 	/**
 	 * Default light theme
 	 */
-	defaultTheme: 'light' as const,
+	defaultTheme: 'gca-light' as const,
 
 	/**
 	 * Dark theme
 	 */
-	darkTheme: 'dark' as const,
+	darkTheme: 'gca-dark' as const,
 
 	/**
 	 * Cookie max age (1 year in seconds)
