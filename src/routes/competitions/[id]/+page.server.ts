@@ -1,42 +1,16 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import type { Competition } from '$lib/types/competition';
-import { getDb } from '$lib/server/db';
-import { wcaCompetitions } from '$lib/server/db/schema';
-import { eq } from 'drizzle-orm';
+import { getCompetitionById } from '$lib/server/competitions';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { id } = params;
 
 	try {
-		const results = await getDb()
-			.select()
-			.from(wcaCompetitions)
-			.where(eq(wcaCompetitions.id, id))
-			.limit(1);
+		const competition = await getCompetitionById(id);
 
-		if (results.length === 0) {
+		if (!competition) {
 			throw error(404, `Competition ${id} not found`);
 		}
-
-		const row = results[0];
-		const competition: Competition = {
-			id: row.id,
-			name: row.name,
-			date: {
-				from: row.startDate ?? '',
-				till: row.endDate ?? ''
-			},
-			city: row.city ?? undefined,
-			venue: row.venue ?? undefined,
-			venueAddress: row.venueAddress ?? undefined,
-			latitude: row.latitudeMicrodegrees
-				? row.latitudeMicrodegrees / 1_000_000
-				: undefined,
-			longitude: row.longitudeMicrodegrees
-				? row.longitudeMicrodegrees / 1_000_000
-				: undefined
-		};
 
 		return {
 			competition
