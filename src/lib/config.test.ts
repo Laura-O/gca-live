@@ -66,13 +66,13 @@ describe('Configuration', () => {
 	describe('THEME_CONFIG', () => {
 		it('should have two themes', () => {
 			expect(THEME_CONFIG.themes).toHaveLength(2);
-			expect(THEME_CONFIG.themes).toContain('light');
-			expect(THEME_CONFIG.themes).toContain('dark');
+			expect(THEME_CONFIG.themes).toContain('gca-light');
+			expect(THEME_CONFIG.themes).toContain('gca-dark');
 		});
 
 		it('should have correct default theme', () => {
-			expect(THEME_CONFIG.defaultTheme).toBe('light');
-			expect(THEME_CONFIG.darkTheme).toBe('dark');
+			expect(THEME_CONFIG.defaultTheme).toBe('gca-light');
+			expect(THEME_CONFIG.darkTheme).toBe('gca-dark');
 		});
 
 		it('should have correct cookie max age', () => {
