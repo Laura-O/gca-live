@@ -6,9 +6,9 @@
 	import { fade } from 'svelte/transition';
 	import Toast from '$lib/components/Toast.svelte';
 
-	// Use WebP with PNG fallback
-	const logoWebP = '/logo.webp';
-	const logoPNG = '/logo.png';
+	const logoLight = '/logo-gca.svg';
+	const logoDark = '/logo-gca-dark.svg';
+	const logoOld = '/logo.png';
 
 	import '../app.css';
 
@@ -56,9 +56,16 @@
 >
 	<div class="navbar">
 		<div class="flex-1">
-			<a class="btn btn-ghost text-xl font-semibold gradient-text" href="/"
-				>GCA Live</a
+			<a
+				href="/"
+				class="flex items-center p-2 rounded-lg hover:bg-base-200 transition-colors"
 			>
+				{#if isDarkTheme}
+					<img src={logoDark} class="h-8" alt="GCA Live" />
+				{:else}
+					<img src={logoLight} class="h-8" alt="GCA Live" />
+				{/if}
+			</a>
 		</div>
 		<div class="flex-none mr-2">
 			<label class="swap swap-rotate" aria-label="Toggle theme">
@@ -153,10 +160,7 @@
 			rel="noopener noreferrer"
 			class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
 		>
-			<picture>
-				<source srcset={logoWebP} type="image/webp" />
-				<img src={logoPNG} class="h-8" alt="GCA Logo" loading="lazy" />
-			</picture>
+			<img src={logoOld} class="h-8" alt="GCA Logo" loading="lazy" />
 		</a>
 	</aside>
 	<nav class="grid-flow-col justify-self-end space-x-3">

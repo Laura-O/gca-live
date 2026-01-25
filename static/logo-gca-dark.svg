@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 40">
+  <text y="32" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="700">
+    <tspan x="10" fill="#ffffff">G</tspan><tspan fill="#dd0000">C</tspan><tspan fill="#ffcc00">A</tspan><tspan fill="#ffffff" dx="20">Live</tspan>
+  </text>
+  <!-- Pulsing dot between GCA and Live -->
+  <circle cx="95" cy="20" r="5" fill="#dd0000">
+    <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>
