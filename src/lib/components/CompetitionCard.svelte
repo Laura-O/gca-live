@@ -5,39 +5,14 @@
 	import { EXTERNAL_URLS } from '$lib/config';
 	import QRCode from '$lib/components/QRCode.svelte';
 	import LinkButton from '$lib/components/LinkButton.svelte';
-	import { createFocusTrap } from 'focus-trap';
 
 	export let competition: Competition;
 	export let showQRButton: boolean;
 
 	let isModalOpen = false;
-	let modalElement: HTMLDivElement;
-	let focusTrap: ReturnType<typeof createFocusTrap> | null = null;
 
-	$: if (isModalOpen && modalElement) {
-		activateFocusTrap();
-	} else if (focusTrap) {
-		deactivateFocusTrap();
-	}
-
-	function activateFocusTrap() {
-		if (!focusTrap && modalElement) {
-			focusTrap = createFocusTrap(modalElement, {
-				escapeDeactivates: true,
-				clickOutsideDeactivates: true,
-				onDeactivate: () => {
-					isModalOpen = false;
-				}
-			});
-			focusTrap.activate();
-		}
-	}
-
-	function deactivateFocusTrap() {
-		if (focusTrap) {
-			focusTrap.deactivate();
-			focusTrap = null;
-		}
+	function openModal() {
+		isModalOpen = true;
 	}
 
 	function closeModal() {
@@ -96,9 +71,10 @@
 		{#if showQRButton}
 			<div class="flex justify-end w-full mt-4">
 				<button
-					class="p-3 rounded-xl bg-primary text-white hover:bg-primary-600 transition-all duration-200 shadow-soft hover:shadow-card-hover"
+					type="button"
+					class="p-3 rounded-xl bg-primary text-white hover:bg-primary-600 transition-all duration-200 shadow-soft hover:shadow-card-hover cursor-pointer"
 					aria-label={$t('content.show-qr-code')}
-					on:click={() => (isModalOpen = true)}
+					on:click|stopPropagation={openModal}
 					><svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -123,16 +99,26 @@
 		{/if}
 	</div>
 </div>
-<div class="modal" class:modal-open={isModalOpen} bind:this={modalElement}>
-	<div class="modal-box glass-card">
-		<QRCode url={EXTERNAL_URLS.gcaLive(competition.id)} />
-		<div class="modal-action">
-			<button
-				class="btn btn-primary shadow-soft hover:shadow-card-hover transition-all duration-200"
-				on:click={closeModal}
-			>
-				{$t('content.close')}
-			</button>
+{#if isModalOpen}
+	<div class="fixed inset-0 z-50 flex items-center justify-center">
+		<!-- Backdrop -->
+		<div
+			class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+			on:click={closeModal}
+			on:keydown={(e) => e.key === 'Escape' && closeModal()}
+			role="button"
+			tabindex="-1"
+		></div>
+		<!-- Modal content -->
+		<div
+			class="relative z-10 bg-base-100 rounded-xl p-6 shadow-xl max-w-sm mx-4"
+		>
+			<QRCode url={EXTERNAL_URLS.gcaLive(competition.id)} />
+			<div class="mt-4 flex justify-center">
+				<button type="button" class="btn btn-primary" on:click={closeModal}>
+					{$t('content.close')}
+				</button>
+			</div>
 		</div>
 	</div>
-</div>
+{/if}
