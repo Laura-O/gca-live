@@ -95,7 +95,22 @@
 	.modern-card {
 		@apply relative bg-base-100 rounded-xl shadow-card transition-all duration-200;
 		@apply hover:shadow-card-hover;
-		@apply border border-neutral-200/50 dark:border-neutral-700/50;
+		@apply border border-neutral-200/50;
+	}
+
+	/* Glassmorphism for dark mode */
+	[data-theme="gca-dark"] .modern-card {
+		background: rgba(30, 30, 30, 0.7);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	}
+
+	[data-theme="gca-dark"] .modern-card:hover {
+		background: rgba(40, 40, 40, 0.8);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 	}
 
 	.modern-card::before {
