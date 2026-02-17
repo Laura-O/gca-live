@@ -1,9 +1,11 @@
 import { neon } from '@neondatabase/serverless';
 import { execSync } from 'child_process';
-import { readFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'fs';
-import { join } from 'path';
+import { readFileSync, rmSync, existsSync, readdirSync, mkdtempSync } from 'fs';
+import { join, dirname } from 'path';
+import { tmpdir } from 'os';
 
-const WCA_EXPORT_URL = 'https://www.worldcubeassociation.org/export/results';
+const WCA_TSV_PERMALINK =
+	'https://www.worldcubeassociation.org/export/results/v2/tsv';
 const BATCH_SIZE = 500;
 
 function log(message: string) {
@@ -14,31 +16,18 @@ async function getExportInfo(): Promise<{
 	zipUrl: string;
 	exportDate: string;
 }> {
-	log('Fetching WCA export page...');
-	const response = await fetch(WCA_EXPORT_URL);
+	log('Resolving latest WCA export URL...');
+	// Follow the permalink redirect to get the actual URL with the date
+	const response = await fetch(WCA_TSV_PERMALINK, { redirect: 'follow' });
 	if (!response.ok) {
-		throw new Error(`Failed to fetch export page: ${response.status}`);
+		throw new Error(`Failed to resolve export URL: ${response.status}`);
 	}
-	const html = await response.text();
+	const zipUrl = response.url;
 
-	// Find the TSV zip download link
-	// URL pattern: https://assets.worldcubeassociation.org/export/results/WCA_export_v2_048_20250217T000009Z.tsv.zip
-	const tsvMatch = html.match(/href="([^"]*WCA_export[^"]*\.tsv\.zip)"/);
-	if (!tsvMatch) {
-		throw new Error(
-			'Could not find TSV export download link on WCA export page'
-		);
-	}
-	let zipUrl = tsvMatch[1];
-	// Make URL absolute if relative
-	if (zipUrl.startsWith('/')) {
-		zipUrl = `https://www.worldcubeassociation.org${zipUrl}`;
-	}
-
-	// Extract date from the URL (e.g., WCA_export_v2_048_20250217T000009Z.tsv.zip)
+	// Extract date from the resolved URL (e.g., WCA_export_v2_048_20250217T000009Z.tsv.zip)
 	const dateMatch = zipUrl.match(/(\d{8})T/);
 	if (!dateMatch) {
-		throw new Error('Could not extract export date from URL');
+		throw new Error(`Could not extract export date from URL: ${zipUrl}`);
 	}
 	const exportDate = dateMatch[1];
 
@@ -67,17 +56,13 @@ async function checkAlreadyImported(
 }
 
 function downloadAndExtract(zipUrl: string): string {
-	const tmpDir = join(process.cwd(), 'tmp-wca-export');
-
-	if (existsSync(tmpDir)) {
-		rmSync(tmpDir, { recursive: true });
-	}
-	mkdirSync(tmpDir, { recursive: true });
-
+	const tmpDir = mkdtempSync(join(tmpdir(), 'wca-export-'));
 	const zipPath = join(tmpDir, 'export.zip');
 
 	log('Downloading export...');
-	execSync(`curl -L -o "${zipPath}" "${zipUrl}"`, { stdio: 'inherit' });
+	execSync(`curl -L --progress-bar -o "${zipPath}" "${zipUrl}"`, {
+		stdio: 'inherit'
+	});
 
 	log('Extracting...');
 	execSync(`unzip -o "${zipPath}" -d "${tmpDir}"`, { stdio: 'inherit' });
@@ -244,8 +229,7 @@ async function batchUpsert(
 	return inserted;
 }
 
-function cleanup() {
-	const tmpDir = join(process.cwd(), 'tmp-wca-export');
+function cleanup(tmpDir: string) {
 	if (existsSync(tmpDir)) {
 		rmSync(tmpDir, { recursive: true });
 		log('Cleaned up temp files');
@@ -261,6 +245,7 @@ async function main() {
 	}
 
 	const sql = neon(process.env.DATABASE_URL);
+	let tmpDir: string | null = null;
 
 	try {
 		// 1. Get export info
@@ -281,6 +266,7 @@ async function main() {
 
 		// 3. Download & extract
 		const tsvPath = downloadAndExtract(zipUrl);
+		tmpDir = dirname(tsvPath);
 
 		// 4. Parse competitions
 		const competitions = parseCompetitionsTsv(tsvPath);
@@ -298,12 +284,11 @@ async function main() {
 		);
 	} finally {
 		// 7. Cleanup
-		cleanup();
+		if (tmpDir) cleanup(tmpDir);
 	}
 }
 
 main().catch((err) => {
 	console.error('Import failed:', err);
-	cleanup();
 	process.exit(1);
 });
