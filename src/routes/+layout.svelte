@@ -60,11 +60,11 @@
 				href="/"
 				class="flex items-center p-2 rounded-lg hover:bg-base-200 transition-colors"
 			>
-				{#if isDarkTheme}
-					<img src={logoDark} class="h-8" alt="GCA Live" />
-				{:else}
-					<img src={logoLight} class="h-8" alt="GCA Live" />
-				{/if}
+				<span class="text-2xl tracking-tight select-none">
+					<span class="font-extrabold text-base-content">GCA</span>
+					<span class="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mx-1 mb-0.5 align-middle"></span>
+					<span class="font-bold text-base-content/60 text-xl">Live</span>
+				</span>
 			</a>
 		</div>
 		<div class="flex-none mr-2">
@@ -203,7 +203,7 @@
 			rel="noopener noreferrer"
 			class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
 		>
-			<img src={logoOld} class="h-8" alt="GCA Logo" loading="lazy" />
+			<img src={logoOld} class="h-8 transition-all duration-200" class:invert={isDarkTheme} alt="GCA Logo" loading="lazy" />
 		</a>
 	</aside>
 	<nav class="grid-flow-col justify-self-end space-x-3">
