@@ -1,4 +1,4 @@
-import { neon } from '@neondatabase/serverless';
+import { neon, type NeonQueryFunction } from '@neondatabase/serverless';
 import { execSync } from 'child_process';
 import { readFileSync, rmSync, existsSync, readdirSync, mkdtempSync } from 'fs';
 import { join, dirname } from 'path';
@@ -36,7 +36,7 @@ async function getExportInfo(): Promise<{
 }
 
 async function checkAlreadyImported(
-	sql: ReturnType<typeof neon>,
+	sql: NeonQueryFunction<false, false>,
 	exportDate: string
 ): Promise<boolean> {
 	// Create import log table if it doesn't exist
@@ -167,7 +167,7 @@ function parseCompetitionsTsv(filePath: string): CompetitionRow[] {
 }
 
 async function batchUpsert(
-	sql: ReturnType<typeof neon>,
+	sql: NeonQueryFunction<false, false>,
 	competitions: CompetitionRow[]
 ) {
 	log(
