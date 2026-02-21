@@ -62,7 +62,9 @@
 			>
 				<span class="text-2xl tracking-tight select-none">
 					<span class="font-extrabold text-base-content">GCA</span>
-					<span class="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mx-1 mb-0.5 align-middle"></span>
+					<span
+						class="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mx-1 mb-0.5 align-middle"
+					></span>
 					<span class="font-bold text-base-content/60 text-xl">Live</span>
 				</span>
 			</a>
@@ -83,30 +85,36 @@
 					viewBox="0 0 36 36"
 				>
 					<!-- Head -->
-					<circle cx="18" cy="18" r="15" fill="#BFA37A" />
+					<circle cx="18" cy="18" r="15" fill="#BFA37A"></circle>
 					<!-- Fur tufts -->
-					<circle cx="7" cy="10" r="4" fill="#BFA37A" />
-					<circle cx="29" cy="10" r="4" fill="#BFA37A" />
-					<circle cx="5" cy="18" r="3.5" fill="#BFA37A" />
-					<circle cx="31" cy="18" r="3.5" fill="#BFA37A" />
-					<circle cx="9" cy="6" r="3" fill="#BFA37A" />
-					<circle cx="27" cy="6" r="3" fill="#BFA37A" />
+					<circle cx="7" cy="10" r="4" fill="#BFA37A"></circle>
+					<circle cx="29" cy="10" r="4" fill="#BFA37A"></circle>
+					<circle cx="5" cy="18" r="3.5" fill="#BFA37A"></circle>
+					<circle cx="31" cy="18" r="3.5" fill="#BFA37A"></circle>
+					<circle cx="9" cy="6" r="3" fill="#BFA37A"></circle>
+					<circle cx="27" cy="6" r="3" fill="#BFA37A"></circle>
 					<!-- Face -->
-					<ellipse cx="18" cy="19" rx="11" ry="10" fill="#E4D5B8" />
+					<ellipse cx="18" cy="19" rx="11" ry="10" fill="#E4D5B8"></ellipse>
 					<!-- Eye patches -->
-					<ellipse cx="13" cy="16" rx="4.5" ry="3.5" fill="#5C4633" />
-					<ellipse cx="23" cy="16" rx="4.5" ry="3.5" fill="#5C4633" />
+					<ellipse cx="13" cy="16" rx="4.5" ry="3.5" fill="#5C4633"></ellipse>
+					<ellipse cx="23" cy="16" rx="4.5" ry="3.5" fill="#5C4633"></ellipse>
 					<!-- Eyes (open, awake) -->
-					<circle cx="13" cy="16" r="2.5" fill="#F5EDE0" />
-					<circle cx="23" cy="16" r="2.5" fill="#F5EDE0" />
-					<circle cx="13.5" cy="16.5" r="1.5" fill="#1A0E08" />
-					<circle cx="23.5" cy="16.5" r="1.5" fill="#1A0E08" />
-					<circle cx="13" cy="15.5" r="0.6" fill="white" opacity="0.7" />
-					<circle cx="23" cy="15.5" r="0.6" fill="white" opacity="0.7" />
+					<circle cx="13" cy="16" r="2.5" fill="#F5EDE0"></circle>
+					<circle cx="23" cy="16" r="2.5" fill="#F5EDE0"></circle>
+					<circle cx="13.5" cy="16.5" r="1.5" fill="#1A0E08"></circle>
+					<circle cx="23.5" cy="16.5" r="1.5" fill="#1A0E08"></circle>
+					<circle cx="13" cy="15.5" r="0.6" fill="white" opacity="0.7"></circle>
+					<circle cx="23" cy="15.5" r="0.6" fill="white" opacity="0.7"></circle>
 					<!-- Nose -->
-					<ellipse cx="18" cy="21" rx="2" ry="1.3" fill="#3D2B1F" />
+					<ellipse cx="18" cy="21" rx="2" ry="1.3" fill="#3D2B1F"></ellipse>
 					<!-- Smile -->
-					<path d="M15 24 Q18 27 21 24" fill="none" stroke="#7A6550" stroke-width="0.8" stroke-linecap="round" />
+					<path
+						d="M15 24 Q18 27 21 24"
+						fill="none"
+						stroke="#7A6550"
+						stroke-width="0.8"
+						stroke-linecap="round"
+					></path>
 				</svg>
 				<!-- Sleeping sloth (shown in light mode → click to switch to dark) -->
 				<svg
@@ -115,29 +123,63 @@
 					viewBox="0 0 36 36"
 				>
 					<!-- Head -->
-					<circle cx="18" cy="18" r="15" fill="#BFA37A" />
+					<circle cx="18" cy="18" r="15" fill="#BFA37A"></circle>
 					<!-- Fur tufts -->
-					<circle cx="7" cy="10" r="4" fill="#BFA37A" />
-					<circle cx="29" cy="10" r="4" fill="#BFA37A" />
-					<circle cx="5" cy="18" r="3.5" fill="#BFA37A" />
-					<circle cx="31" cy="18" r="3.5" fill="#BFA37A" />
-					<circle cx="9" cy="6" r="3" fill="#BFA37A" />
-					<circle cx="27" cy="6" r="3" fill="#BFA37A" />
+					<circle cx="7" cy="10" r="4" fill="#BFA37A"></circle>
+					<circle cx="29" cy="10" r="4" fill="#BFA37A"></circle>
+					<circle cx="5" cy="18" r="3.5" fill="#BFA37A"></circle>
+					<circle cx="31" cy="18" r="3.5" fill="#BFA37A"></circle>
+					<circle cx="9" cy="6" r="3" fill="#BFA37A"></circle>
+					<circle cx="27" cy="6" r="3" fill="#BFA37A"></circle>
 					<!-- Face -->
-					<ellipse cx="18" cy="19" rx="11" ry="10" fill="#E4D5B8" />
+					<ellipse cx="18" cy="19" rx="11" ry="10" fill="#E4D5B8"></ellipse>
 					<!-- Eye patches -->
-					<ellipse cx="13" cy="16" rx="4.5" ry="3.5" fill="#5C4633" />
-					<ellipse cx="23" cy="16" rx="4.5" ry="3.5" fill="#5C4633" />
+					<ellipse cx="13" cy="16" rx="4.5" ry="3.5" fill="#5C4633"></ellipse>
+					<ellipse cx="23" cy="16" rx="4.5" ry="3.5" fill="#5C4633"></ellipse>
 					<!-- Eyes (closed, sleeping) -->
-					<path d="M10 16.5 Q13 14.5 16 16.5" fill="none" stroke="#E4D5B8" stroke-width="1.5" stroke-linecap="round" />
-					<path d="M20 16.5 Q23 14.5 26 16.5" fill="none" stroke="#E4D5B8" stroke-width="1.5" stroke-linecap="round" />
+					<path
+						d="M10 16.5 Q13 14.5 16 16.5"
+						fill="none"
+						stroke="#E4D5B8"
+						stroke-width="1.5"
+						stroke-linecap="round"
+					></path>
+					<path
+						d="M20 16.5 Q23 14.5 26 16.5"
+						fill="none"
+						stroke="#E4D5B8"
+						stroke-width="1.5"
+						stroke-linecap="round"
+					></path>
 					<!-- Nose -->
-					<ellipse cx="18" cy="21" rx="2" ry="1.3" fill="#3D2B1F" />
+					<ellipse cx="18" cy="21" rx="2" ry="1.3" fill="#3D2B1F"></ellipse>
 					<!-- Sleepy smile -->
-					<path d="M15 24 Q18 27 21 24" fill="none" stroke="#7A6550" stroke-width="0.8" stroke-linecap="round" />
+					<path
+						d="M15 24 Q18 27 21 24"
+						fill="none"
+						stroke="#7A6550"
+						stroke-width="0.8"
+						stroke-linecap="round"
+					></path>
 					<!-- Zzz -->
-					<text x="27" y="10" font-size="5" font-weight="bold" fill="#7A6550" opacity="0.7" font-family="Inter, sans-serif">z</text>
-					<text x="30" y="7" font-size="4" font-weight="bold" fill="#7A6550" opacity="0.5" font-family="Inter, sans-serif">z</text>
+					<text
+						x="27"
+						y="10"
+						font-size="5"
+						font-weight="bold"
+						fill="#7A6550"
+						opacity="0.7"
+						font-family="Inter, sans-serif">z</text
+					>
+					<text
+						x="30"
+						y="7"
+						font-size="4"
+						font-weight="bold"
+						fill="#7A6550"
+						opacity="0.5"
+						font-family="Inter, sans-serif">z</text
+					>
 				</svg>
 			</label>
 		</div>
@@ -185,7 +227,7 @@
 	</div>
 </nav>
 
-<main id="main-content">
+<main id="main-content" class="pb-20">
 	{#key $page.url.pathname}
 		<div in:fade={{ duration: 150, delay: 150 }} out:fade={{ duration: 150 }}>
 			<slot />
@@ -203,7 +245,13 @@
 			rel="noopener noreferrer"
 			class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
 		>
-			<img src={logoOld} class="h-8 transition-all duration-200" class:invert={isDarkTheme} alt="GCA Logo" loading="lazy" />
+			<img
+				src={logoOld}
+				class="h-8 transition-all duration-200"
+				class:invert={isDarkTheme}
+				alt="GCA Logo"
+				loading="lazy"
+			/>
 		</a>
 	</aside>
 	<nav class="grid-flow-col justify-self-end space-x-3">

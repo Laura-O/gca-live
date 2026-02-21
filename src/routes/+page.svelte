@@ -55,7 +55,7 @@
 	</div>
 
 	<!-- Filter Section -->
-	<div class="flex flex-col items-center gap-4 pb-32 md:pb-28">
+	<div class="flex flex-col items-center gap-4">
 		<label for="days" class="text-sm font-medium text-base-content/70">
 			{$t('content.days-label')}
 		</label>
