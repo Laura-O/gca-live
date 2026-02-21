@@ -236,7 +236,7 @@
 </main>
 
 <footer
-	class="footer fixed bottom-0 bg-base-100/95 backdrop-blur-md border-t border-primary-200/50 dark:border-primary-800/50 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] p-4 grid grid-cols-2 justify-items-stretch"
+	class="footer fixed bottom-0 z-40 bg-base-100/95 backdrop-blur-md border-t border-primary-200/50 dark:border-primary-800/50 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] p-4 grid grid-cols-2 justify-items-stretch"
 >
 	<aside class="grid-flow-col">
 		<a
