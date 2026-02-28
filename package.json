@@ -46,7 +46,7 @@
 		"prettier-plugin-svelte": "^3.5.0",
 		"rollup-plugin-visualizer": "^7.0.0",
 		"sharp": "^0.34.5",
-		"svelte": "^5.53.3",
+		"svelte": "^5.53.6",
 		"svelte-check": "^4.4.3",
 		"svelte-eslint-parser": "^1.4.1",
 		"svelte-i18n": "^4.0.1",
