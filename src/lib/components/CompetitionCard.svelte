@@ -72,7 +72,7 @@
 			<div class="flex justify-end w-full mt-4">
 				<button
 					type="button"
-					class="p-3 rounded-xl bg-primary text-white hover:bg-primary-600 transition-all duration-200 shadow-soft hover:shadow-card-hover cursor-pointer"
+					class="p-3 rounded-xl bg-primary-500 text-white hover:bg-primary-600 transition-all duration-200 shadow-soft hover:shadow-card-hover cursor-pointer"
 					aria-label={$t('content.show-qr-code')}
 					on:click|stopPropagation={openModal}
 					><svg
