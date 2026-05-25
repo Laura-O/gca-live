@@ -3,7 +3,7 @@
         "eslint --fix",
         "prettier --write"
     ],
-    "*.{svelte}": [
+    "*.svelte": [
         "eslint --fix",
         "prettier --write",
         "svelte-check"
