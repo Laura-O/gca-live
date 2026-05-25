@@ -37,7 +37,7 @@ However, several areas require attention:
 - **Impact**: If this file is accidentally committed, shared, or accessed by unauthorized parties, attackers could gain full access to the production database including read/write access to all competition data.
 - **Evidence**:
   ```
-  DATABASE_URL='postgresql://neondb_owner:npg_JSNoLT13vfnd@ep-dawn-thunder-ah4qqb9j-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+  DATABASE_URL='postgresql://fsdfsdfsdfsdfs.neon.tech/neondb?sslmode=require&channel_binding=require'
   ```
 - **Remediation Checklist**:
   - [ ] **IMMEDIATELY rotate the database password** in Neon dashboard since it has been displayed in this audit
