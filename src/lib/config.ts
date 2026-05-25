@@ -11,7 +11,7 @@ export const EXTERNAL_URLS = {
 	 * WCA Live competition URL
 	 */
 	wcaLive: (competitionId: string) =>
-		`https://live.worldcubeassociation.org/link/${competitionId}`,
+		`https://live.worldcubeassociation.org/link/competitions/${competitionId}`,
 
 	/**
 	 * Competition Groups URL
