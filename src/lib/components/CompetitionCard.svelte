@@ -33,7 +33,7 @@
 		<ul class="my-4 space-y-3 flex flex-col items-center w-full">
 			<li class="w-full max-w-xs">
 				<LinkButton
-					href={EXTERNAL_URLS.wcaLiveNew(competition.id)}
+					href={EXTERNAL_URLS.wcaLive(competition.id)}
 					external
 					className="w-full"
 				>
@@ -42,11 +42,11 @@
 			</li>
 			<li class="w-full max-w-xs">
 				<LinkButton
-					href={EXTERNAL_URLS.wcaLive(competition.id)}
+					href={EXTERNAL_URLS.wcaLiveNew(competition.id)}
 					external
 					className="w-full"
 				>
-					WCA Live (old)
+					WCA Live (new)
 				</LinkButton>
 			</li>
 			<li class="w-full max-w-xs">
