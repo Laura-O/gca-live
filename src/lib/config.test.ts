@@ -16,6 +16,13 @@ describe('Configuration', () => {
 			);
 		});
 
+		it('should generate correct WCA Live (new) URL', () => {
+			const url = EXTERNAL_URLS.wcaLiveNew('test-comp-2025');
+			expect(url).toBe(
+				'https://www.worldcubeassociation.org/competitions/test-comp-2025/live'
+			);
+		});
+
 		it('should generate correct Competition Groups URL', () => {
 			const url = EXTERNAL_URLS.competitionGroups('test-comp-2025');
 			expect(url).toBe(

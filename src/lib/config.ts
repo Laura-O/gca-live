@@ -14,6 +14,13 @@ export const EXTERNAL_URLS = {
 		`https://live.worldcubeassociation.org/link/competitions/${competitionId}`,
 
 	/**
+	 * WCA Live competition URL on the main WCA website. Replaces wcaLive for
+	 * comps that have been migrated; both currently coexist during rollout.
+	 */
+	wcaLiveNew: (competitionId: string) =>
+		`https://www.worldcubeassociation.org/competitions/${competitionId}/live`,
+
+	/**
 	 * Competition Groups URL
 	 */
 	competitionGroups: (competitionId: string) =>

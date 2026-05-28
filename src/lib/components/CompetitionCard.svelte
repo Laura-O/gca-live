@@ -31,13 +31,20 @@
 			</a>
 		</h2>
 		<ul class="my-4 space-y-3 flex flex-col items-center w-full">
-			<li class="w-full max-w-xs">
+			<li class="w-full max-w-xs flex gap-2">
 				<LinkButton
 					href={EXTERNAL_URLS.wcaLive(competition.id)}
 					external
-					className="w-full"
+					className="flex-1"
 				>
 					WCA Live
+				</LinkButton>
+				<LinkButton
+					href={EXTERNAL_URLS.wcaLiveNew(competition.id)}
+					external
+					className="flex-1"
+				>
+					WCA Live (new)
 				</LinkButton>
 			</li>
 			<li class="w-full max-w-xs">
