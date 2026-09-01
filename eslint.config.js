@@ -112,7 +112,8 @@ export default [
 			'dist/**',
 			'*.config.js',
 			'*.config.ts',
-			'.netlify/**'
+			'.netlify/**',
+			'.vercel/**'
 		]
 	},
 	prettier
