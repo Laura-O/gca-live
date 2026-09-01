@@ -13,4 +13,15 @@ updates:
       actions-deps:
         patterns:
           - "*"
-
+    ignore:
+      # TypeScript 7 changed the compiler's JS API, and this project's
+      # toolchain cannot consume it yet:
+      #   - typescript-eslint refuses to load ("does not support TS 7.0");
+      #     tracked at typescript-eslint/typescript-eslint#10940.
+      #   - svelte-check requires TS 6 and TS 7 installed side by side via an
+      #     npm alias, plus a --tsgo flag.
+      # Either one takes down `npm run lint` / `npm run check`. A grouped bump
+      # to TS 7 broke CI on main for a month (fixed in #225).
+      # Drop this entry once both tools support TypeScript 7 unaided.
+      - dependency-name: 'typescript'
+        update-types: ['version-update:semver-major']
