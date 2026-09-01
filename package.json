@@ -41,7 +41,7 @@
 		"happy-dom": "^20.10.6",
 		"husky": "^9.1.7",
 		"lint-staged": "^17.0.8",
-		"postcss": "^8.5.19",
+		"postcss": "^8.5.26",
 		"prettier": "^3.9.5",
 		"prettier-plugin-svelte": "^4.1.1",
 		"rollup-plugin-visualizer": "^7.0.1",
