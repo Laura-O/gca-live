@@ -1,10 +1,10 @@
 import { json } from '@sveltejs/kit';
-import { env } from '$env/dynamic/private';
+import { CACHE_API_KEY } from '$app/env/private';
 import type { RequestHandler } from './$types';
 import { getCacheStats, clearCache } from '$lib/server/cache';
 
 function isAuthorized(request: Request): boolean {
-	const secret = env.CACHE_API_KEY;
+	const secret = CACHE_API_KEY;
 	if (!secret) {
 		// No key configured = endpoint disabled in production
 		return false;
