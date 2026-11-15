@@ -2,7 +2,7 @@
 	import { t, locales, locale } from '$lib/translations';
 	import { THEME_CONFIG, EXTERNAL_URLS } from '$lib/config';
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { fade } from 'svelte/transition';
 	import Toast from '$lib/components/Toast.svelte';
 
@@ -228,7 +228,7 @@
 </nav>
 
 <main id="main-content" class="pb-20">
-	{#key $page.url.pathname}
+	{#key page.url.pathname}
 		<div in:fade={{ duration: 150, delay: 150 }} out:fade={{ duration: 150 }}>
 			<slot />
 		</div>

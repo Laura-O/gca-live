@@ -1,6 +1,6 @@
 <script lang="ts">
 	import QRCode from 'qrcode';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { toasts } from '$lib/stores/toast';
 	import { t } from '$lib/translations';
 
